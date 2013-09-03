@@ -33,14 +33,13 @@ state = The state the button should be shown in (STRING)
 OnClick = The action that takes place when the button is clicked (ANONYMOUS FUNCTION)
 clickable = Whether or not the button is clickable (BOOLEAN)
 enabled = Whether or not the button is enabled (BOOLEAN)
-tweenable = Whether or not you can tween the object (BOOLEAN)
-desX = The destination X of the button. Only required of the object is tweenable (NUMBER)
-desY = The destination Y of the button. Only required of the object is tweenable (NUMBER)
+desX = The destination X of the button (NUMBER)
+desY = The destination Y of the button (NUMBER)
 
 ]]
 
 -- Helper function to create buttons
-function gui.makeButton( text, x, y, w, h, state, OnClick, clickable, enabled, tweenable, desX, desY )
+function gui.makeButton( text, x, y, w, h, state, OnClick, clickable, enabled, desX, desY )
 	local text = text or "Default Text"
 	local x = x or 0
 	local y = y or 0
@@ -50,9 +49,8 @@ function gui.makeButton( text, x, y, w, h, state, OnClick, clickable, enabled, t
 	local OnClick = OnClick or defaultButtonCallback
 	local clickable = clickable or true
 	local enabled = enabled or true
-	local tweenable = tweenable or true
-	local desX = desX or 0
-	local desY = desY or 0
+	local desX = desX or x
+	local desY = desY or y
 
 	getText = function()
 		return text
@@ -131,7 +129,7 @@ function gui.createMenus(  )
 		love.quit()
 	end
 
-	StartButton = gui.makeButton( "Start", 0-150, ( screenHeight/2-30/2 ), 150, 30, "startmenu", StartButtonCallback, true, false, true, ( screenWidth/2-150/2 ), ( screenHeight/2-30/2 ) )
-	OptionsButton = gui.makeButton( "Settings", ( screenWidth/2-150/2 ), ( screenHeight/2-30/2+50 ), 150, 30, "startmenu", OptionsButtonCallback, true, false )
-	QuitButton = gui.makeButton( "Quit", ( screenWidth/2-150/2 ), ( screenHeight/2-30/2+100 ), 150, 30, "startmenu", QuitButtonCallback, true, false )
+	StartButton = gui.makeButton( "Start", 0-150, ( screenHeight/2-30/2 ), 150, 30, "startmenu", StartButtonCallback, true, true, ( screenWidth/2-150/2 ), ( screenHeight/2-30/2 ) )
+	OptionsButton = gui.makeButton( "Settings", screenWidth, ( screenHeight/2-30/2+50 ), 150, 30, "startmenu", OptionsButtonCallback, true, true, ( screenWidth/2-150/2 ), nil )
+	QuitButton = gui.makeButton( "Quit", 0-150, ( screenHeight/2-30/2+100 ), 150, 30, "startmenu", QuitButtonCallback, true, true, ( screenWidth/2-150/2 ), ( screenHeight/2-30/2 ) )
 end

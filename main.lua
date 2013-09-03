@@ -3,6 +3,7 @@ require("gui") -- Requires the gui file for my GUI's
 
 -- Require any mods below
 
+
 require("assets/libs/AnAL") -- Requires the AnAL Library for Spritesheet Animation
 require("assets/libs/lovedebug") -- Requires the lovedebug Library for debugging
 require("assets/libs/loveframes") -- Requies the LöveFrames Library for GUI stuff
@@ -19,13 +20,20 @@ imageProperties = {}
 
 imageProperties[logoImage] = {}
 imageProperties[logoImage].x = screenWidth/2-logoImage:getWidth()/2
-imageProperties[logoImage].y = 0-logoImage:getHeight()
-imageProperties[logoImage].desX = 
+imageProperties[logoImage].y = 10
+
+imageProperties[backgroundImage] = {}
+imageProperties[backgroundImage].w = backgroundImage:getWidth()
+imageProperties[backgroundImage].h = backgroundImage:getHeight()
+
+local backgroundQuad = love.graphics.newQuad(0, 0, screenWidth, screenHeight, backgroundImage:getWidth(), backgroundImage:getHeight())
 
 local backgroundX1 = 0
 local backgroundX2 = screenWidth
 
 local backgroundColor = { 0,0,0 }
+
+backgroundImage:setWrap("repeat", "repeat")
 
 function love.load(  )
 	gamestate = "startmenu"
@@ -35,6 +43,8 @@ function love.load(  )
 
 	tween(1, backgroundColor, { 255,255,255 }, 'linear')
 	tween(1, StartButton, { x=StartButton.getDesX() }, 'linear')
+	tween(1, OptionsButton, { x=OptionsButton.getDesX() }, 'linear')
+	tween(1, QuitButton, { x=QuitButton.getDesX() }, 'linear')
 end
 
 function love.update( dt )
@@ -49,6 +59,7 @@ function love.update( dt )
 			backgroundX2 = screenWidth
 		end
 	end
+
 	tween.update(dt)
 	loveframes.update(dt)
 end
@@ -57,8 +68,8 @@ function love.draw(  )
 	if gamestate == "startmenu" then 
 		love.graphics.setColor(backgroundColor)
 
-		love.graphics.draw(backgroundImage, backgroundX1, 0)
-		love.graphics.draw(backgroundImage, backgroundX2, 0)
+		love.graphics.drawq(backgroundImage, backgroundQuad, backgroundX1, 0)
+		love.graphics.drawq(backgroundImage, backgroundQuad, backgroundX2, 0)
 
 		love.graphics.draw(logoImage, imageProperties[logoImage].x, imageProperties[logoImage].y )
 	end
