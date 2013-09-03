@@ -31,7 +31,7 @@ local backgroundQuad = love.graphics.newQuad(0, 0, screenWidth, screenHeight, ba
 local backgroundX1 = 0
 local backgroundX2 = screenWidth
 
-local backgroundColor = { 0,0,0 }
+backgroundColor = { 0,0,0 }
 
 backgroundImage:setWrap("repeat", "repeat")
 
