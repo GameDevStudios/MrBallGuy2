@@ -118,25 +118,18 @@ end
 
 function gui.createMenus(  )
 	local StartButtonCallback = function(object)
-		
-	end
-
-	local OptionsButtonCallback = function(object)
 		tween(.5, StartButton, { x=screenWidth }, 'linear')
-		tween(.5, OptionsButton, { x=0-150 }, 'linear')
-		tween(.5, QuitButton, { x=screenWidth }, 'linear')
-		tween(.5, logoColour, { 255, 255, 255, 0 }, 'linear')
+		tween(.5, QuitButton, { x=0-150 }, 'linear')
+		tween(.5, logoColour, { 0,0,0,0 }, 'linear')
 	end
 
 	local QuitButtonCallback = function(object)
 		tween(.5, StartButton, { x=screenWidth }, 'linear')
-		tween(.5, OptionsButton, { x=0-150 }, 'linear')
-		tween(.5, QuitButton, { x=screenWidth }, 'linear')
+		tween(.5, QuitButton, { x=0-150 }, 'linear')
 		tween(.5, backgroundColor, { 0,0,0 }, 'linear', love.quit, nil)
-		tween(.5, logoColour, { 0,0,0 }, 'linear')
+		tween(.5, logoColour, { 0,0,0,0 }, 'linear')
 	end
 
 	StartButton = gui.makeButton( "Start", 0-150, ( screenHeight/2-30/2 ), 150, 30, "startmenu", StartButtonCallback, true, true, ( screenWidth/2-150/2 ), ( screenHeight/2-30/2 ) )
-	OptionsButton = gui.makeButton( "Settings", screenWidth, ( screenHeight/2-30/2+50 ), 150, 30, "startmenu", OptionsButtonCallback, true, true, ( screenWidth/2-150/2 ), nil )
-	QuitButton = gui.makeButton( "Quit", 0-150, ( screenHeight/2-30/2+100 ), 150, 30, "startmenu", QuitButtonCallback, true, true, ( screenWidth/2-150/2 ), ( screenHeight/2-30/2 ) )
+	QuitButton = gui.makeButton( "Quit", screenWidth, ( screenHeight/2-30/2+50 ), 150, 30, "startmenu", QuitButtonCallback, true, true, ( screenWidth/2-150/2 ), nil )
 end

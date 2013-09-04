@@ -46,7 +46,6 @@ function love.load(  )
 
 	tween(1, backgroundColor, { 255,255,255 }, 'linear')
 	tween(1, StartButton, { x=StartButton.getDesX() }, 'linear')
-	tween(1, OptionsButton, { x=OptionsButton.getDesX() }, 'linear')
 	tween(1, QuitButton, { x=QuitButton.getDesX() }, 'linear')
 	tween(1, logoColour, { 255,255,255 }, 'linear')
 end
@@ -62,6 +61,8 @@ function love.update( dt )
 		if backgroundX2 < 0 then 
 			backgroundX2 = screenWidth
 		end
+	elseif gamestate == "loginscreen" then 
+		
 	end
 
 	tween.update(dt)
@@ -79,6 +80,8 @@ function love.draw(  )
 		love.graphics.draw(logoImage, imageProperties[logoImage].x, imageProperties[logoImage].y )
 	
 		love.graphics.setColor(255,255,255)
+	elseif gamestate == "loginscreen" then 
+
 	end
 
 	loveframes.draw()
