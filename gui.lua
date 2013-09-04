@@ -38,7 +38,6 @@ desY = The destination Y of the button (NUMBER)
 
 ]]
 
--- Helper function to create buttons
 function gui.makeButton( text, x, y, w, h, state, OnClick, clickable, enabled, desX, desY )
 	local text = text or "Default Text"
 	local x = x or 0
@@ -126,8 +125,8 @@ function gui.createMenus(  )
 	local QuitButtonCallback = function(object)
 		tween(.5, StartButton, { x=screenWidth }, 'linear')
 		tween(.5, QuitButton, { x=0-150 }, 'linear')
-		tween(.5, backgroundColor, { 0,0,0 }, 'linear', love.quit, nil)
 		tween(.5, logoColour, { 0,0,0,0 }, 'linear')
+		tween(.5, backgroundColor, { 0,0,0 }, 'linear', love.quit)
 	end
 
 	StartButton = gui.makeButton( "Start", 0-150, ( screenHeight/2-30/2 ), 150, 30, "startmenu", StartButtonCallback, true, true, ( screenWidth/2-150/2 ), ( screenHeight/2-30/2 ) )

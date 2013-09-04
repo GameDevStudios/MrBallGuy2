@@ -21,6 +21,7 @@ logoImage = love.graphics.newImage("assets/img/logo.png")
 imageProperties = {}
 
 imageProperties[logoImage] = {}
+imageProperties[logoImage].img = logoImage
 imageProperties[logoImage].x = screenWidth/2-logoImage:getWidth()/2
 imageProperties[logoImage].y = 30
 
