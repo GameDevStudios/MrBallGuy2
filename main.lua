@@ -1,5 +1,6 @@
 require("player") -- Requires the player file
 require("gui") -- Requires the gui file for my GUI's
+require("loveframesHelpers") -- Requires some of the helper functions I wrote with LöveFrames
 
 -- Require any mods below
 
