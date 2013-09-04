@@ -15,6 +15,8 @@ local screenHeight = love.graphics.getHeight()
 
 local doneOnce = false
 
+clickSfx = love.audio.newSource("assets/sound/sfx.ogg")
+
 backgroundImage = love.graphics.newImage("assets/img/background.png")
 logoImage = love.graphics.newImage("assets/img/logo.png")
 
