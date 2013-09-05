@@ -133,7 +133,7 @@ function helpers.makeFrame( name, x, y, w, h, state, OnClose, draggable, centere
 	local OnClose = OnClose or defaultFrameCloseCallback
 	local draggable = draggable
 	local centered = centered or true
-	local icon = icon or defaultFrameIcon
+	local icon = icon or nil --defaultFrameIcon
 	local showCloseButton = showCloseButton
 	local parent = parent
 
