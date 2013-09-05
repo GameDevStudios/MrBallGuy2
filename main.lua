@@ -2,9 +2,6 @@ require("player") -- Requires the player file
 require("gui") -- Requires the gui file for my GUI's
 require("loveframesHelpers") -- Requires some of the helper functions I wrote with LöveFrames
 
--- Require any mods below
-
-
 require("assets/libs/AnAL") -- Requires the AnAL Library for Spritesheet Animation
 require("assets/libs/lovedebug") -- Requires the lovedebug Library for debugging
 require("assets/libs/loveframes") -- Requies the LöveFrames Library for GUI stuff
