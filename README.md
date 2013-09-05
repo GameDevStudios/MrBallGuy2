@@ -30,3 +30,27 @@ Is Mr. BallGuy 2 a finished project?
 ====================================
 
 No, it is not. It is far from a finished project. It will be fully open source though.
+
+What is planned for Mr. BallGuy 2?
+===================================
+
+Mr. BallGuy 2 will hopefully be very extensible. I'm still working on ideas, and they're changing every day, but here are some planned features:<br/>
+
+FULL Modding Support<br/>
+A mod software centre<br/>
+Texture Pack Support<br/>
+Achievements<br/>
+Multiple "Accounts"<br/>
+Multiplayer -- Global and Local<br/>
+
+They are not all of the planned features, but those are just some of the ideas I have planned.
+
+Can you give a release date for the game?
+=========================================
+
+Well... yes AND no. I hope to have a demo out in early 2014, but maybe Mid-2014? That's what I'm hoping for, but I wont rush it if it's not done yet. I know a lot of people follow a particular quote, and I follow it too: "It's ready when it's ready!".
+
+Can I contribute?
+=================
+
+Of course! How? You can report issues, suggest ideas, and even ask to help development. You are free to send in art for the game or music, provided it is not copyrighted and I am free to use.
