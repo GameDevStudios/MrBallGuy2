@@ -3,24 +3,14 @@ helpers = {}
 local screenWidth = love.graphics.getWidth()
 local screenHeight = love.graphics.getHeight()
 
-local getText
-local getX
-local getY 
-local getWidth 
-local getHeight
-local getState 
-local getClickCallback
-local getClickable 
-local getEnabled
-local getTweenable
-local getDesX
-local getDesY
+local defaultButtonCallback = function(object) print("Button Clicked!") end
+local defaultFrameCloseCallback = function(object) print("Frame close button pressed!") end
 
-local defaultButtonCallback
+local defaultFrameIcon = love.graphics.newImage("assets/img/defaultFrameIcon.png")
 
 --[[
 
-gui.makeButton:
+helpers.makeButton:
 
 text = Text to be displayed on the button (STRING)
 x = The X position of the button initially (NUMBER)
@@ -36,7 +26,7 @@ desY = The destination Y of the button (NUMBER)
 
 ]]
 
-function helpers.makeButton( text, x, y, w, h, state, OnClick, clickable, enabled, desX, desY )
+function helpers.makeButton( text, x, y, w, h, state, OnClick, clickable, enabled, desX, desY, parent )
 	local text = text or "Default Text"
 	local x = x or 0
 	local y = y or 0
@@ -48,52 +38,49 @@ function helpers.makeButton( text, x, y, w, h, state, OnClick, clickable, enable
 	local enabled = enabled or true
 	local desX = desX or x
 	local desY = desY or y
+	local parent = parent or self
 
-	getText = function()
+	local getText = function()
 		return text
 	end
-	getX = function()
+	local getX = function()
 		return x
 	end
-	getY = function()
+	local getY = function()
 		return y
 	end
-	getWidth = function()
+	local getWidth = function()
 		return w
 	end
-	getHeight = function()
+	local getHeight = function()
 		return h
 	end
-	getState = function()
+	local getState = function()
 		return state
 	end
-	getClickCallback = function()
+	local getClickCallback = function()
 		return OnClick()
 	end
-	getClickable = function()
+	local getClickable = function()
 		return clickable 
 	end
-	getEnabled = function() 
+	local getEnabled = function() 
 		return enabled
 	end
-	getTweenable = function()
-		return tweenable
-	end
-	getDesX = function()
+	local getDesX = function()
 		return desX 
 	end
-	getDesY = function()
+	local getDesY = function()
 		return desY
 	end
-
-	defaultButtonCallback = function(object)
-		print(button.text)
+	local getParent = function()
+		return parent
 	end
 
-	local button = loveframes.Create("button")
+	local button = loveframes.Create("button", parent)
 	button:SetText(text)
 	button:SetPos(x,y)
-	button:SetSize(w,h)
+	button:SetSize(w,h) 
 	button:SetState(state)
 	button:SetEnabled(enabled)
 	button:SetClickable(clickable)
@@ -111,4 +98,87 @@ function helpers.makeButton( text, x, y, w, h, state, OnClick, clickable, enable
 	button.getHeight = getHeight
 
 	return button
+end
+
+--[[
+
+helpers.makeFrame:
+
+name = The title of the frame (STRING)
+x = The X position of the frame (NUMBER)
+y = The Y position of the frame (NUMBER)
+w = The Width of the frame (NUMBER)
+h = The Height of the frame (NUMBER)
+state = The LöveFrames state in which the frame should be displayed (STRING)
+OnClose = The action that takes place when the frame is closed (ANONYMOUS FUNCTION)
+draggable = Whether the frame is able to be dragged around or not (BOOLEAN)
+centered = Whether the frame is centered or not (BOOLEAN)
+icon = The icon for the window (IMAGE OBJECT OR STRING PATH TO IMAGE)
+
+There are built in functions for getting the Name, getting whether the frame is draggable or not and getting the frame icon. They are:
+
+frameObject:GetDraggable()
+frameObject:GetName
+frameObject:GetIcon
+
+]]
+
+function helpers.makeFrame( name, x, y, w, h, state, OnClose, draggable, centered, icon, showCloseButton, parent )
+	local name = name or "Default Frame Name"
+	local x = x
+	local y = y
+	local w = w or 100
+	local h = h or 200
+	local state = state or "startmenu"
+	local OnClose = OnClose or defaultFrameCloseCallback
+	local draggable = draggable
+	local centered = centered or true
+	local icon = icon or defaultFrameIcon
+	local showCloseButton = showCloseButton
+	local parent = parent
+
+	local getX = function()
+		return x
+	end
+	local getY = function()
+		return y 
+	end
+	local getWidth = function()
+		return w 
+	end
+	local getHeight = function()
+		return h 
+	end
+	local getState = function()
+		return state
+	end
+	local getCentered = function()
+		
+	end
+	local getParent = function()
+		return parent
+	end
+
+	local frame = loveframes.Create("frame", parent)
+	frame:SetPos(x, y)
+	frame:SetSize(w, h)
+	frame:SetName(name)
+	frame:SetState(state)
+	frame:SetDraggable(draggable)
+	frame:SetIcon(icon)
+	frame:ShowCloseButton(showCloseButton)
+	frame.OnClose = OnClose
+
+	frame.getX = getX 
+	frame.getWidth = getWidth
+	frame.getHeight = getHeight
+	frame.getState = getState
+	frame.getCentered = getCentered
+	frame.getParent = getParent
+
+	if centered then 
+		frame:Center()
+	end
+
+	return frame
 end

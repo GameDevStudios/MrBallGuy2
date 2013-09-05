@@ -46,7 +46,7 @@ function love.load(  )
 	gui.createMenus()
 
 	tween(1, backgroundColor, { 255,255,255 }, 'linear')
-	tween(1, StartButton, { x=StartButton.getDesX() }, 'linear')
+	tween(1, StartMenuStartButton, { x=StartMenuStartButton.getDesX() }, 'linear')
 	tween(1, QuitButton, { x=QuitButton.getDesX() }, 'linear')
 	tween(1, logoColour, { 255,255,255 }, 'linear')
 end
@@ -77,7 +77,6 @@ function love.draw(  )
 		love.graphics.drawq(backgroundImage, backgroundQuad, backgroundX2, 0)
 
 		love.graphics.setColor(logoColour)
-
 		love.graphics.draw(logoImage, imageProperties[logoImage].x, imageProperties[logoImage].y )
 	
 		love.graphics.setColor(255,255,255)
