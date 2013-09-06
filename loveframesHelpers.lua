@@ -8,6 +8,8 @@ local defaultFrameCloseCallback = function(object) print("Frame close button pre
 
 local defaultFrameIcon = love.graphics.newImage("assets/img/defaultFrameIcon.png")
 
+local defaultFont = love.graphics.newFont(30)
+
 --[[
 
 helpers.makeButton:
@@ -181,4 +183,79 @@ function helpers.makeFrame( name, x, y, w, h, state, OnClose, draggable, centere
 	end
 
 	return frame
+end
+
+--[[
+
+helpers.makeTextInput:
+
+defaultText = The text that is in the textbox by default (STRING)
+focusGainedCallback = The action that takes place when the textbox gains focus (ANONYMOUS FUNCTION)
+focusLostCallback = The action that takes place when the textbox loses focus (ANONYMOUS FUNCTION)
+textChangedCallback = The action that takes place when the text in the textbox is changed (ANONYMOUS FUNCTION)
+offsetX = The offset of the text on the X axis (NUMBER)
+offsetY = The offset of the text on the Y axis (NUMBER)
+characterLimit = The limit of the amount of characters you can enter (NUMBER)
+font = The font used for the text
+parent = The parent of the object
+state = The LöveFrames state the object should be displayed in
+x = The X position of the object
+y = The Y position of the object
+w = The Width of the object
+h = The Height of the object
+
+]]
+
+function helpers.makeTextInput( defaultText, focusGainedCallback, focusLostCallback, textChangedCallback, offsetX, offsetY, characterLimit, font, parent, state, x, y, w, h )
+	local defaultText = defaultText or ""
+	local focusGainedCallback = focusGainedCallback
+	local focusLostCallback = focusLostCallback
+	local textChangedCallback = textChangedCallback
+	local offsetX = offsetX
+	local offsetY = offsetY
+	local characterLimit = characterLimit
+	local font = font
+	local parent = parent
+	local state = state
+	local x = x
+	local y = y
+	local w = w 
+	local h = h
+
+	local getDefaultText = function()
+		return defaultText
+	end
+	local getParnet = function()
+		return parent
+	end
+	local getState = function()
+		return state
+	end
+	local getX = function()
+		return x
+	end
+	local getY = function()
+		return y
+	end
+	local getWidth = function()
+		return w
+	end
+	local getHeight = function()
+		return h
+	end
+	-- GetFont, GetOffsetX, GetOffsetY, etc are all included with LöveFrames internally
+
+	local textInput = loveframes.Create("textinput", parent)
+	textInput:SetText(defaultText)
+	textInput:SetState(state)
+	textInput:SetTextOffsetX(offsetX)
+	textInput:SetTextOffsetY(offsetY)
+	textInput:SetPos(x,y)
+	textInput:SetSize(w,h)
+	textInput:SetLimit(characterLimit)
+	textInput.OnTextChanged = textChangedCallback
+	textInput.OnFocusGained = focusGainedCallback
+	textInput.OnFocusLost = focusLostCallback
+
+	return textInput
 end

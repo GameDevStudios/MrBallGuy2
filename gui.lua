@@ -40,12 +40,18 @@ function gui.createMenus(  )
 		clickSfx:play()
 	end
 
-	local ProfileSelectCreateProfileButtonCallback = function() 
+	local ProfileSelectCreateProfileButtonCallback = function(object) 
 		loveframes.SetState("createProfile")
+		local ProfileCreationTextInputUsername = helpers.makeTextInput( "Username", nil, nil, nil, 0, 0, 20, nil, ProfileSelectCreateProfileFrame, "createProfile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, 100, 150, 30 )
+		local ProfileCreationTextInputPassword = helpers.makeTextInput( "Password", nil, nil, nil, 0, 0, 50, nil, ProfileSelectCreateProfileFrame, "createProfile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, 150, 150, 30 )
+
+		clickSfx:play()
 	end
 
-	local ProfileSelectCancelButtonCallback = function() 
+	local ProfileCreationCancelButtonCallback = function(object) 
 		loveframes.SetState("loginscreen")
+
+		clickSfx:play()
 	end
 
 	-- All the GUI stuff for the start menu
@@ -56,6 +62,8 @@ function gui.createMenus(  )
 	ProfileSelectFrame = helpers.makeFrame( "Select Profile", nil, nil, screenWidth-200, screenHeight-100, "loginscreen", nil, false, true, nil, false, nil )
 	ProfileSelectBackButton = helpers.makeButton( "Back", ProfileSelectFrame:getWidth()/2-150/2, ProfileSelectFrame:getHeight()-50, 150, 30, "loginscreen", ProfileSelectFrameBackButtonCallback, true, true, nil, nil, ProfileSelectFrame )
 	ProfileSelectCreateProfileButton = helpers.makeButton( "Create new profile!", ProfileSelectFrame:getWidth()/2-150/2, 30, 150, 30, "loginscreen", ProfileSelectCreateProfileButtonCallback, true, true, nil, nil, ProfileSelectFrame )
+
+	-- All the GUI stuff for the profile creation menu
 	ProfileSelectCreateProfileFrame = helpers.makeFrame( "Create new profile", nil, nil, screenWidth-200, screenHeight-100, "createProfile", nil, false, true, nil, false, nil )
-	ProfileSelectCancelButton = helpers.makeButton( "Cancel", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, ProfileSelectCreateProfileFrame:getHeight()-50, 150, 30, "createProfile" , ProfileSelectCancelButtonCallback, false, true, nil, false, ProfileSelectCreateProfileFrame )
+	ProfileCreationCancelButton = helpers.makeButton( "Cancel", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, ProfileSelectCreateProfileFrame:getHeight()-50, 150, 30, "createProfile" , ProfileCreationCancelButtonCallback, false, true, nil, false, ProfileSelectCreateProfileFrame )
 end
