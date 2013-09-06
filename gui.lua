@@ -42,8 +42,8 @@ function gui.createMenus(  )
 
 	local ProfileSelectCreateProfileButtonCallback = function(object) 
 		loveframes.SetState("createProfile")
+
 		local ProfileCreationTextInputUsername = helpers.makeTextInput( "Username", nil, nil, nil, 0, 0, 20, nil, ProfileSelectCreateProfileFrame, "createProfile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, 100, 150, 30 )
-		local ProfileCreationTextInputPassword = helpers.makeTextInput( "Password", nil, nil, nil, 0, 0, 50, nil, ProfileSelectCreateProfileFrame, "createProfile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, 150, 150, 30 )
 
 		clickSfx:play()
 	end
