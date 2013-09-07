@@ -120,8 +120,8 @@ icon = The icon for the window (IMAGE OBJECT OR STRING PATH TO IMAGE)
 There are built in functions for getting the Name, getting whether the frame is draggable or not and getting the frame icon. They are:
 
 frameObject:GetDraggable()
-frameObject:GetName
-frameObject:GetIcon
+frameObject:GetName()
+frameObject:GetIcon()
 
 ]]
 
@@ -196,13 +196,15 @@ textChangedCallback = The action that takes place when the text in the textbox i
 offsetX = The offset of the text on the X axis (NUMBER)
 offsetY = The offset of the text on the Y axis (NUMBER)
 characterLimit = The limit of the amount of characters you can enter (NUMBER)
-font = The font used for the text
-parent = The parent of the object
-state = The LöveFrames state the object should be displayed in
-x = The X position of the object
-y = The Y position of the object
-w = The Width of the object
-h = The Height of the object
+font = The font used for the text (FONT OBJECT OR STRING PATH)
+parent = The parent of the object (LÖVEFRAMES OBJECT)
+state = The LöveFrames state the object should be displayed in (STRING)
+x = The X position of the object (NUMBER)
+y = The Y position of the object (NUMBER)
+w = The Width of the object (NUMBER)
+h = The Height of the object (NUMBER)
+
+GetFont, GetOffsetX, GetOffsetY, etc are all included with LöveFrames internally
 
 ]]
 
@@ -243,7 +245,6 @@ function helpers.makeTextInput( defaultText, focusGainedCallback, focusLostCallb
 	local getHeight = function()
 		return h
 	end
-	-- GetFont, GetOffsetX, GetOffsetY, etc are all included with LöveFrames internally
 
 	local textInput = loveframes.Create("textinput", parent)
 	textInput:SetText(defaultText)
@@ -258,4 +259,57 @@ function helpers.makeTextInput( defaultText, focusGainedCallback, focusLostCallb
 	textInput.OnFocusLost = focusLostCallback
 
 	return textInput
+end
+
+--[[
+
+helpers.makeText:
+
+text = The text to be displayed (STRING)
+x = The X position of the text (NUMBER)
+y = The Y position of the text (NUMBER)
+maxWidth = The position at which the text starts to wrap (NUMBER)
+font = The font of the text (FONT OBJECT OR STRING PATH)
+shadow = Whether there is a shadow (BOOLEAN)
+shadowColor = The color of the shadow (NUMBER)
+color = The default color of the text (NUMBER)
+parent = The parent object of the text (LÖVEFRAMES OBJECT)
+
+GetShadowOffsets, GetShadow, GetText, GetShadowColor, GetDefaultColor and GetFont are all in LöveFrames internally
+
+]]
+
+function helpers.makeText( text, x, y, maxWidth, font, shadow, shadowColor, color, parent, shadowOffsetX, shadowOffsetY, state )
+	local text = text 
+	local x = x 
+	local y = y 
+	local maxWidth = maxWidth
+	local font = font 
+	local shadow = shadow
+	local shadowColor = shadowColor
+	local color = color
+	local parent = parent
+
+	local getX = function()
+		return x
+	end
+	local getY = function()
+		return y
+	end
+	local getParent = function()
+		return parent
+	end
+
+	local text = loveframes.Create("text", parent)
+	text:SetText(text)
+	text:SetState(state)
+	text:SetPos(x,y)
+	text:SetMaxWidth(maxWidth)
+	text:SetFont(font)
+	text:SetShadow(shadow)
+	text:SetShadowColor(shadowColor)
+	text:SetDefaultColor(color)
+	text:SetShadowOffsets(shadowOffsetX,shadowOffsetY)
+
+	return text
 end

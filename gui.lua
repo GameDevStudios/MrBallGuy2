@@ -5,6 +5,16 @@ local screenHeight = love.graphics.getHeight()
 
 local tween = require "assets/libs/tween"
 
+local ProfileCreationCreateProfileButton
+local ProfileCreationTextInputUsername
+
+local defaultTextFont = love.graphics.newFont(50)
+
+local defaultTextColor = { 0,0,0 }
+
+local profileAlreadyExistsFrameError
+local profileAlreadyExistsTextError
+
 function gui.createMenus(  )
 	local StartMenuStartButtonCallback = function(object)
 		tween(.5, StartMenuStartButton, { x=screenWidth }, 'linear', loveframes.SetState, "loginscreen")
@@ -40,10 +50,25 @@ function gui.createMenus(  )
 		clickSfx:play()
 	end
 
+	local ProfileCreationCreateProfileButtonCallback = function(object)
+		local username = ProfileCreationTextInputUsername:GetText()
+
+		clickSfx:play()
+
+		if love.filesystem.exists( tostring(username) ) then 
+			profileAlreadyExistsFrameError = helpers.makeFrame( "Profile Already Exists", nil, nil, screenWidth-200, screenHeight-100, "createProfile", function(object) clickSfx:play() end, false, true, nil, true, nil )
+			profileAlreadyExistsTextError = helpers.makeText( "Sorry, that username is already taken.", screenWidth/2-defaultTextFont:getWidth("Sorry, that username is already taken.")/2, screenHeight/2-defaultTextFont:getHeight("Sorry, that username is already taken.")/2, screenWidth-200, false, nil, defaultTextColor, profileAlreadyExistsFrameError, nil, nil, "createProfile" )
+		else 
+			local userSaveDir = love.filesystem.mkdir( tostring(username) )
+			loveframes.SetState("loginscreen")
+		end
+	end
+
 	local ProfileSelectCreateProfileButtonCallback = function(object) 
 		loveframes.SetState("createProfile")
 
-		local ProfileCreationTextInputUsername = helpers.makeTextInput( "Username", nil, nil, nil, 0, 0, 20, nil, ProfileSelectCreateProfileFrame, "createProfile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, 100, 150, 30 )
+		ProfileCreationTextInputUsername = helpers.makeTextInput( "Username", nil, nil, nil, 0, 0, 20, nil, ProfileSelectCreateProfileFrame, "createProfile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, 100, 150, 30 )
+		ProfileCreationCreateProfileButton = helpers.makeButton( "Create User Profile", ProfileSelectCreateProfileFrame:getWidth()/2-150/2, ProfileSelectCreateProfileFrame:getHeight()/2-30/2, 150, 30, "createProfile", ProfileCreationCreateProfileButtonCallback, true, true, nil, nil, ProfileSelectCreateProfileFrame )
 
 		clickSfx:play()
 	end
